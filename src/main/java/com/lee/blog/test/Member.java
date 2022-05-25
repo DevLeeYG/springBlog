@@ -24,7 +24,7 @@ public class Member {
     }
 
     public String getUsername(){
-        return username
+        return username;
     }
 
     public void setUsername(String username){

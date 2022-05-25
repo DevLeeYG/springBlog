@@ -10,21 +10,21 @@ import org.springframework.web.bind.annotation.*;
 public class HttpControllerTest {
 
     @GetMapping("/http/get")
-    public String getTest(){
-        return "get요청";
+    public String getTest(Member m){
+        return "get요청:" + m.getId()+"."+m.getUsername()+"."+m.getPassword()+"."+m.getEmail();
     }
-    @PostMapping("/http/post")
-    public String posTest(){
-        return "post요청";
+    @PostMapping("/http/post")//바디로 들어온 데이터를 맵핵해서 보내준다
+    public String postTest(@RequestBody Member m){
+        return "post:" + m.getId()+"."+m.getUsername()+"."+m.getPassword()+"."+m.getEmail();
     }
     @PutMapping("/http/put")
 
-    public String putTest(){
-        return "put요청";
+    public String putTest(@RequestBody Member m){
+        return "put:" + m.getId()+"."+m.getUsername()+"."+m.getPassword()+"."+m.getEmail();
     }
     @DeleteMapping("/http/delete")
-    public String deleteTest(){
-        return "delete요청";
+    public String deleteTest(@RequestBody Member m){
+        return "delete:" + m.getId()+"."+m.getUsername()+"."+m.getPassword()+"."+m.getEmail();
     }
 
 
