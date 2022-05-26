@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
-
+import org.hibernate.annotations.DynamicInsert;
 
 
 import javax.persistence.*;
@@ -19,6 +19,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Builder
 @Data
+//@DynamicInsert insert 시에 널인필드를 제외
 @Entity
 public class User {
     @Id//primary key
@@ -30,7 +31,7 @@ public class User {
     private String password;
     @Column(nullable = false,length = 30)
     private String email;
-    @ColumnDefault("'user'")
+
     private String role;// Enum 을 쓰는게 좋다
     @CreationTimestamp //시간이 자동입력
     private Timestamp createDate;
