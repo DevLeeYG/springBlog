@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
-
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -31,8 +32,10 @@ public class User {
     private String password;
     @Column(nullable = false,length = 30)
     private String email;
-
-    private String role;// Enum 을 쓰는게 좋다
+//    @ColumnDefault("user")
+    //db는 Role타입이라는게 없다
+    @Enumerated(EnumType.STRING)
+    private RoleType role;// Enum 을 쓰는게 좋다 //ADMIN,USER
     @CreationTimestamp //시간이 자동입력
     private Timestamp createDate;
 }
