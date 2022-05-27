@@ -3,14 +3,20 @@ package com.lee.blog.test;
 
 import com.lee.blog.model.RoleType;
 import com.lee.blog.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.lee.blog.model.User;
 
-import java.util.Optional;
+import java.util.List;
+
 import java.util.function.Supplier;
 
 @RestController
@@ -21,6 +27,11 @@ public class DummyControllerTest {
 
     //주소로 파라미터를 받을수 있음
     //user 가 있으면 바로 user 를 리턴하지만 없다면 get 함수가 실행된다(빈객체 는 null은 아니다)
+
+    @GetMapping("/dummy/users")
+    public List<User> list(){//유저 리스트 를 받아야되서 리스트 를 쓴다다
+        return userRepository.findAll();
+    }
 
     @GetMapping("/dummy/user/{id}")
     public User detail(@PathVariable int id){
@@ -40,6 +51,16 @@ public class DummyControllerTest {
        return user;
 
     }
+    @GetMapping("/dummy/user")
+   public List<User> pageList(@PageableDefault(size=2,sort="id",direction=Sort.Direction.DESC) Pageable pageable){
+      Page<User> pagingUser = userRepository.findAll(pageable);
+
+      List<User> users = pagingUser.getContent();
+      return users;
+    }
+
+
+
 
     @PostMapping("/dummy/join")
     public String join(User user){
