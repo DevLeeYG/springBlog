@@ -5,6 +5,7 @@ import com.lee.blog.model.RoleType;
 import com.lee.blog.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -91,6 +92,16 @@ public class DummyControllerTest {
 //        userRepository.save(user);
 
         return null;
+    }
+
+    @DeleteMapping("/dummy/user/{id}")
+    public String delete(@PathVariable int id){
+        try {
+            userRepository.deleteById((id));
+        }catch(EmptyResultDataAccessException e){
+            return "삭제에 실패하였습니다. 해당 아이디는 없습니다";
+        }
+        return "삭제되었습니다. id"+id;
     }
 
 
