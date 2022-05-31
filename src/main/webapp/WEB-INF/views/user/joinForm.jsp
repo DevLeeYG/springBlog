@@ -6,23 +6,27 @@
 
 
 <div class="container">
-    <form action="/action_page.php">
+    <form>
         <div class="form-group">
-            <label for="email">Email address:</label>
-            <input type="email" class="form-control" placeholder="Enter email" id="email">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" placeholder="username" id="username">
         </div>
         <div class="form-group">
-            <label for="pwd">Password:</label>
-            <input type="password" class="form-control" placeholder="Enter password" id="pwd">
+            <label for="email">Password</label>
+            <input type="password" class="form-control" placeholder="password" id="password">
+        </div>
+        <div class="form-group">
+            <label for="password">Email</label>
+            <input type="email" class="form-control" placeholder="email" id="email">
         </div>
         <div class="form-group form-check">
             <label class="form-check-label">
                 <input class="form-check-input" type="checkbox"> Remember me
             </label>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button id="btn-save" type="submit" class="btn btn-primary">회원가입완료</button>
     </form>
 </div>
 <br/>
-
+<script src="/blog/js/user.js"></script>
 <%@include file="../layout/footer.jsp" %>
