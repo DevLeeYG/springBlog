@@ -1,5 +1,7 @@
 package com.lee.blog.controller;
 
+import com.lee.blog.config.auth.PrincipalDetail;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -8,8 +10,12 @@ public class BoardController {
 
 
     @GetMapping({"","/"})
-    public String index(){
+    public String index(@AuthenticationPrincipal PrincipalDetail principal){
         return "index";
     }
 
+    @GetMapping("/board/saveForm")
+    public String saveFrom(){
+        return "board/saveForm";
+    }
 }
