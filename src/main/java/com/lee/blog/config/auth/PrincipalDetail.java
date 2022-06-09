@@ -1,6 +1,8 @@
 package com.lee.blog.config.auth;
 
 import com.lee.blog.model.User;
+import lombok.Data;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -10,6 +12,7 @@ import java.util.Collection;
 //스프링 시큐리티가 로그인 요청을 가로채서 로그인을 진행하고 완가 되면 UserDetails 타입의 오브젝트를
 //스프링 시큐리티의 고유한 세션 저장소에 저장을 한다.
 
+@Getter
 public class PrincipalDetail implements UserDetails {
     private User user;
 
