@@ -1,7 +1,6 @@
 package com.lee.blog.service;
 
 
-
 import com.lee.blog.model.Board;
 import com.lee.blog.model.RoleType;
 import com.lee.blog.model.User;
@@ -24,16 +23,42 @@ public class BoardService {
     private BoardRepository boardRepository;
 
 
-
     @Transactional
-    public void 글쓰기(Board board,User user) {
+    public void 글쓰기(Board board, User user) {
         board.setCount(0);
         board.setUser(user);
         boardRepository.save(board);
     }
 
-    public Page<Board> 글목록(Pageable pageable){
+    @Transactional(readOnly = true)
+    public Board 글상세보기(int id) {
+        return boardRepository.findById(id)
+                .orElseThrow(() -> {
+                    return new IllegalArgumentException("글 상세보기실패:아이디를 찾을 수 없습니다.");
+                });
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Board> 글목록(Pageable pageable) {
         return boardRepository.findAll(pageable);
     }
 
+
+    @Transactional
+    public void 글삭제하기(int id) {
+        boardRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void 글수정하기(int id, Board requestBoard) {
+        Board board = boardRepository.findById(id)
+                .orElseThrow(() -> {
+            return new IllegalArgumentException("글 찾기실패:아이디를 찾을 수 없습니다.");
+        });
+        board.setTitle(requestBoard.getTitle());
+        board.setContent(requestBoard.getContent());
+        //해당함수로 종료시에(service종료) 트랜잭션이 종료된다. 이때 더티체킹 //자동업데이트가 됨
+    }
 }
+
+
