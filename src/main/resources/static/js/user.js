@@ -9,11 +9,11 @@ let index = {
     },
     save:function (){
         let data ={
-            id:$("#id").val(),
+            username:$("#username").val(),
             password:$("#password").val(),
             email:$("#email").val()
         }
-
+    console.log(data)
         $.ajax({
             type:"POST",
             url:"/auth/joinProc",
